@@ -4,7 +4,7 @@ use std::error::Error;
 mod year2022;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    Aoc::<2022, 0>::run()?;
+    Aoc::<2022>::run()?;
     Ok(())
 }
 
@@ -20,7 +20,7 @@ trait Run {
     }
 }
 
-struct Aoc<const Y: u32, const D: u8>(String);
+struct Aoc<const Y: u32, const D: u8 = 0>(String);
 
 impl<const Y: u32, const D: u8> Run for Aoc<Y, D> {
     default fn run() -> Result<(), Box<dyn Error>> {
