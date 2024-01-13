@@ -1,26 +1,47 @@
 #![feature(min_specialization)]
-use std::{error::Error, io::Write};
+use std::{error::Error, fmt::Display, ops::Deref};
 
 mod year2022;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let data = std::fs::read_to_string("src/year2022/day2.rs")?;
-    for i in 3..=25 {
-        let mut a = std::fs::File::create(format!("src/year2022/day{i}.rs"))?;
-        a.write(data.as_bytes())?;
-    }
     Aoc::<2022, 1>::run()?;
     Ok(())
+}
+
+enum AocResult {
+    Num(i64),
+    Str(String)
+}
+
+impl From<i64> for AocResult {
+    fn from(value: i64) -> Self {
+        Self::Num(value)
+    }
+}
+
+impl From<String> for AocResult {
+    fn from(value: String) -> Self {
+        Self::Str(value)
+    }
+}
+
+impl Display for AocResult {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            AocResult::Num(a) => write!(f, "{a}"),
+            AocResult::Str(a) => write!(f, "{a}"),
+        }
+    }
 }
 
 trait Run {
     fn run() -> Result<(), Box<dyn Error>> {
         unreachable!()
     }
-    fn parta(&self) -> Result<String, Box<dyn Error>> {
+    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
         unreachable!()
     }
-    fn partb(&self) -> Result<String, Box<dyn Error>> {
+    fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
         unreachable!()
     }
 }
@@ -32,6 +53,8 @@ trait Run {
 /// unimplemented days (including any number above 25) yields unimplemented.
 /// 
 /// Aoc::\<Y, D\>::run() runs day D
+/// 
+/// implements deref -> &str, so can be used in place of String.
 struct Aoc<const Y: u32, const D: u8 = 0>(String);
 
 impl<const Y: u32, const D: u8> Run for Aoc<Y, D> {
@@ -44,10 +67,10 @@ impl<const Y: u32, const D: u8> Run for Aoc<Y, D> {
         println!("{Y}-{D}b: {}", a.partb()?);
         Ok(())
     }
-    default fn parta(&self) -> Result<String, Box<dyn Error>> {
+    default fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
         unimplemented!("tried to run {Y}-{D}-a")
     }
-    default fn partb(&self) -> Result<String, Box<dyn Error>> {
+    default fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
         unimplemented!("tried to run {Y}-{D}-a")
     }
 }
@@ -80,5 +103,13 @@ impl<const Y: u32> Run for Aoc<Y, 0> {
         Aoc::<Y, 24>::run()?;
         Aoc::<Y, 25>::run()?;
         Ok(())
+    }
+}
+
+impl<const Y: u32, const D: u8> Deref for Aoc<Y, D> {
+    type Target = str;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
     }
 }

@@ -2,9 +2,8 @@ use super::*;
 use std::error::Error;
 
 impl Run for Aoc<2022, 1> {
-    fn parta(&self) -> Result<String, Box<dyn Error>> {
-        let text = self.0.as_str();
-        let res = text
+    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
+        let res = self
             .split("\n\n")
             .map(|x| {
                 x.split('\n')
@@ -14,9 +13,9 @@ impl Run for Aoc<2022, 1> {
             })
             .max()
             .unwrap();
-        Ok(res.to_string())
+        Ok(res.into())
     }
-    // fn partb(&self) -> Result<String, Box<dyn Error>> {
+    // fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
     //     unimplemented!()
     // }
 }

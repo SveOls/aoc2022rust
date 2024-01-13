@@ -1,11 +1,11 @@
-use super::*;
-use std::error::Error;
+// use super::*;
+// use std::error::Error;
 
-impl Run for Aoc<2022, 2> {
-    fn parta(&self) -> Result<String, Box<dyn Error>> {
-        unimplemented!()
-    }
-    fn partb(&self) -> Result<String, Box<dyn Error>> {
-        unimplemented!()
-    }
-}
+// impl Run for Aoc<2022, 25> {
+//     fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
+//         unimplemented!()
+//     }
+//     fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
+//         unimplemented!()
+//     }
+// }

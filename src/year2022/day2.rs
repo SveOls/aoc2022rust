@@ -2,10 +2,10 @@ use super::*;
 use std::error::Error;
 
 impl Run for Aoc<2022, 2> {
-    fn parta(&self) -> Result<String, Box<dyn Error>> {
+    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
         unimplemented!()
     }
-    fn partb(&self) -> Result<String, Box<dyn Error>> {
+    fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
         unimplemented!()
     }
 }
