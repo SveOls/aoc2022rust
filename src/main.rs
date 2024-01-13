@@ -1,10 +1,15 @@
 #![feature(min_specialization)]
-use std::error::Error;
+use std::{error::Error, io::Write};
 
 mod year2022;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    Aoc::<2022>::run()?;
+    let data = std::fs::read_to_string("src/year2022/day2.rs")?;
+    for i in 3..=25 {
+        let mut a = std::fs::File::create(format!("src/year2022/day{i}.rs"))?;
+        a.write(data.as_bytes())?;
+    }
+    Aoc::<2022, 1>::run()?;
     Ok(())
 }
 
@@ -20,6 +25,13 @@ trait Run {
     }
 }
 
+/// Aoc::\<Y\>::run() iterates over all 25 days 
+/// 
+/// as does Aoc::\<Y, 0\>::run()
+/// 
+/// unimplemented days (including any number above 25) yields unimplemented.
+/// 
+/// Aoc::\<Y, D\>::run() runs day D
 struct Aoc<const Y: u32, const D: u8 = 0>(String);
 
 impl<const Y: u32, const D: u8> Run for Aoc<Y, D> {
@@ -33,10 +45,10 @@ impl<const Y: u32, const D: u8> Run for Aoc<Y, D> {
         Ok(())
     }
     default fn parta(&self) -> Result<String, Box<dyn Error>> {
-        unimplemented!()
+        unimplemented!("tried to run {Y}-{D}-a")
     }
     default fn partb(&self) -> Result<String, Box<dyn Error>> {
-        unimplemented!()
+        unimplemented!("tried to run {Y}-{D}-a")
     }
 }
 

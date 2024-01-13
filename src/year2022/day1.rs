@@ -16,7 +16,7 @@ impl Run for Aoc<2022, 1> {
             .unwrap();
         Ok(res.to_string())
     }
-    fn partb(&self) -> Result<String, Box<dyn Error>> {
-        unimplemented!()
-    }
+    // fn partb(&self) -> Result<String, Box<dyn Error>> {
+    //     unimplemented!()
+    // }
 }
