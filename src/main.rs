@@ -24,7 +24,10 @@ struct Aoc<const Y: u32, const D: u8>(String);
 
 impl<const Y: u32, const D: u8> Run for Aoc<Y, D> {
     default fn run() -> Result<(), Box<dyn Error>> {
-        let a = Self(std::fs::read_to_string(format!("input/{Y}/day{D}.txt")).map_err(<Box<dyn Error>>::from)?);
+        let a = Self(
+            std::fs::read_to_string(format!("input/{Y}/day{D}.txt"))
+                .map_err(<Box<dyn Error>>::from)?,
+        );
         println!("{Y}-{D}a: {}", a.parta()?);
         println!("{Y}-{D}b: {}", a.partb()?);
         Ok(())
