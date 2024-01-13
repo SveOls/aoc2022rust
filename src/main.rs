@@ -4,7 +4,7 @@ use std::{error::Error, fmt::Display, ops::Deref};
 mod year2022;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    Aoc::<2022, 1>::run()?;
+    Aoc::<2022>::run()?;
     Ok(())
 }
 
@@ -22,12 +22,6 @@ impl From<i64> for AocResult {
 impl From<String> for AocResult {
     fn from(value: String) -> Self {
         Self::Str(value)
-    }
-}
-
-impl From<AocResult> for Result<AocResult, Box<dyn Error>> {
-    fn from(value: AocResult) -> Self {
-        Ok(value)
     }
 }
 
