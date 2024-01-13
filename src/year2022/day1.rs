@@ -3,7 +3,7 @@ use std::error::Error;
 
 impl Run for Aoc<2022, 1> {
     fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
-        let res = self
+        Ok(self
             .split("\n\n")
             .map(|x| {
                 x.split('\n')
@@ -12,8 +12,8 @@ impl Run for Aoc<2022, 1> {
                     .sum::<i64>()
             })
             .max()
-            .unwrap();
-        Ok(res.into())
+            .unwrap()
+            .into())
     }
     // fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
     //     unimplemented!()

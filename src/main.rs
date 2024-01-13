@@ -10,7 +10,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 enum AocResult {
     Num(i64),
-    Str(String)
+    Str(String),
 }
 
 impl From<i64> for AocResult {
@@ -22,6 +22,12 @@ impl From<i64> for AocResult {
 impl From<String> for AocResult {
     fn from(value: String) -> Self {
         Self::Str(value)
+    }
+}
+
+impl From<AocResult> for Result<AocResult, Box<dyn Error>> {
+    fn from(value: AocResult) -> Self {
+        Ok(value)
     }
 }
 
@@ -46,14 +52,14 @@ trait Run {
     }
 }
 
-/// Aoc::\<Y\>::run() iterates over all 25 days 
-/// 
+/// Aoc::\<Y\>::run() iterates over all 25 days
+///
 /// as does Aoc::\<Y, 0\>::run()
-/// 
+///
 /// unimplemented days (including any number above 25) yields unimplemented.
-/// 
+///
 /// Aoc::\<Y, D\>::run() runs day D
-/// 
+///
 /// implements deref -> &str, so can be used in place of String.
 struct Aoc<const Y: u32, const D: u8 = 0>(String);
 
