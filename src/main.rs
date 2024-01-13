@@ -13,10 +13,10 @@ trait Run {
         unreachable!()
     }
     fn parta(&self) -> Result<String, Box<dyn Error>> {
-        unimplemented!()
+        unreachable!()
     }
     fn partb(&self) -> Result<String, Box<dyn Error>> {
-        unimplemented!()
+        unreachable!()
     }
 }
 
