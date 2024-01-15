@@ -1,5 +1,15 @@
+#![feature(error_in_core)]
 #![feature(min_specialization)]
-use std::{error::Error, fmt::Display, ops::Deref};
+#![feature(iter_array_chunks)]
+#![feature(slice_flatten)]
+#![feature(iter_map_windows)]
+#![feature(slice_first_last_chunk)]
+#![feature(array_windows)]
+use core::{
+    error::Error,
+    fmt::{Display, Formatter},
+    ops::Deref,
+};
 
 mod year2022;
 
@@ -19,6 +29,12 @@ impl From<i64> for AocResult {
     }
 }
 
+impl From<usize> for AocResult {
+    fn from(value: usize) -> Self {
+        Self::Num(value as i64)
+    }
+}
+
 impl From<String> for AocResult {
     fn from(value: String) -> Self {
         Self::Str(value)
@@ -26,7 +42,7 @@ impl From<String> for AocResult {
 }
 
 impl Display for AocResult {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
         match self {
             AocResult::Num(a) => write!(f, "{a}"),
             AocResult::Str(a) => write!(f, "{a}"),
@@ -59,12 +75,28 @@ struct Aoc<const Y: u32, const D: u8 = 0>(String);
 
 impl<const Y: u32, const D: u8> Run for Aoc<Y, D> {
     default fn run() -> Result<(), Box<dyn Error>> {
-        let a = Self(
-            std::fs::read_to_string(format!("input/{Y}/day{D}.txt"))
-                .map_err(<Box<dyn Error>>::from)?,
+        // let a = Self(
+        //     std::fs::read_to_string(format!("input/{Y}/day{D}.txt"))
+        //         .map_err(<Box<dyn Error>>::from)?,
+        // );
+        // println!("{Y}-{D}a: {}", a.parta()?);
+        // println!("{Y}-{D}b: {}", a.partb()?);
+        println!(
+            "{Y}-{D}a: {}",
+            Self(
+                std::fs::read_to_string(format!("input/{Y}/day{D}.txt"))
+                    .map_err(<Box<dyn Error>>::from)?,
+            )
+            .parta()?
         );
-        println!("{Y}-{D}a: {}", a.parta()?);
-        println!("{Y}-{D}b: {}", a.partb()?);
+        println!(
+            "{Y}-{D}b: {}",
+            Self(
+                std::fs::read_to_string(format!("input/{Y}/day{D}.txt"))
+                    .map_err(<Box<dyn Error>>::from)?,
+            )
+            .partb()?
+        );
         Ok(())
     }
     default fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
