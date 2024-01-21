@@ -107,7 +107,7 @@ impl From<&str> for Monkey {
 }
 
 impl Run for Aoc<2022, 11> {
-    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn parta(&self) -> Result<AocResult, AocError> {
         let mut monkeys: Vec<Monkey> = self.split("\n\n").map(Monkey::from).collect();
         let mut ret = vec![0; monkeys.len()];
         for _ in 0..20 {
@@ -122,7 +122,7 @@ impl Run for Aoc<2022, 11> {
         ret.reverse();
         Ok((ret[0] * ret[1]).into())
     }
-    fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn partb(&self) -> Result<AocResult, AocError> {
         let mut monkeys: Vec<Monkey> = self.split("\n\n").map(Monkey::from).collect();
         let lcm = monkeys
             .iter()

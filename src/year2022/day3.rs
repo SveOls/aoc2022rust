@@ -1,8 +1,7 @@
 use super::*;
-use std::error::Error;
 
 impl Run for Aoc<2022, 3> {
-    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn parta(&self) -> Result<AocResult, AocError> {
         Ok(self
             .lines()
             .map(|x| x.split_at(x.char_indices().nth(x.chars().count() / 2).unwrap().0))
@@ -11,7 +10,7 @@ impl Run for Aoc<2022, 3> {
             .sum::<i64>()
             .into())
     }
-    fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn partb(&self) -> Result<AocResult, AocError> {
         Ok(self
             .lines()
             .array_chunks::<3>()

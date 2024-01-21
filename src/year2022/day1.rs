@@ -1,8 +1,7 @@
 use super::*;
-use std::error::Error;
 
 impl Run for Aoc<2022, 1> {
-    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn parta(&self) -> Result<AocResult, AocError> {
         Ok(self
             .split("\n\n")
             .map(|x| {
@@ -15,7 +14,7 @@ impl Run for Aoc<2022, 1> {
             .unwrap()
             .into())
     }
-    fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn partb(&self) -> Result<AocResult, AocError> {
         Ok(self
             .split("\n\n")
             .map(|x| {

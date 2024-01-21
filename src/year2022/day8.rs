@@ -1,7 +1,7 @@
 use super::*;
 
 impl Run for Aoc<2022, 8> {
-    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn parta(&self) -> Result<AocResult, AocError> {
         let a: [[u8; 99]; 99] = self
             .lines()
             .map(|x| {
@@ -39,7 +39,7 @@ impl Run for Aoc<2022, 8> {
         }
         Ok(ret.into())
     }
-    fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn partb(&self) -> Result<AocResult, AocError> {
         let mut a: [[u8; 99]; 99] = self
             .lines()
             .map(|x| {

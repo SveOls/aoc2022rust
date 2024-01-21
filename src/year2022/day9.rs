@@ -81,7 +81,7 @@ impl From<&str> for Heading {
 }
 
 impl Run for Aoc<2022, 9> {
-    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn parta(&self) -> Result<AocResult, AocError> {
         Ok(self
             .lines()
             .map(Heading::from)
@@ -90,7 +90,7 @@ impl Run for Aoc<2022, 9> {
             .len()
             .into())
     }
-    fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn partb(&self) -> Result<AocResult, AocError> {
         Ok(self
             .lines()
             .map(Heading::from)

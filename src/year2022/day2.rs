@@ -1,5 +1,4 @@
 use super::*;
-use std::error::Error;
 
 enum Play {
     Rock,
@@ -56,7 +55,7 @@ impl From<char> for Play {
 }
 
 impl Run for Aoc<2022, 2> {
-    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn parta(&self) -> Result<AocResult, AocError> {
         Ok(self
             .lines()
             .map(|x| {
@@ -71,7 +70,7 @@ impl Run for Aoc<2022, 2> {
             .sum::<i64>()
             .into())
     }
-    fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn partb(&self) -> Result<AocResult, AocError> {
         Ok(self
             .lines()
             .map(|x| {

@@ -31,7 +31,7 @@ impl From<&str> for Instr {
 }
 
 impl Run for Aoc<2022, 10> {
-    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn parta(&self) -> Result<AocResult, AocError> {
         Ok(self
             .lines()
             .map(Instr::from)
@@ -45,7 +45,7 @@ impl Run for Aoc<2022, 10> {
             .fold(0i64, |acc, (x, i, _)| acc + x * ((i + 19) / 20) as i64 * 20)
             .into())
     }
-    fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn partb(&self) -> Result<AocResult, AocError> {
         Ok(self
             .lines()
             .map(Instr::from)

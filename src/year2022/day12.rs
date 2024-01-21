@@ -3,7 +3,7 @@ use std::collections::{HashSet, VecDeque};
 use super::*;
 
 impl Run for Aoc<2022, 12> {
-    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn parta(&self) -> Result<AocResult, AocError> {
         let mut data: Vec<Vec<_>> = self.lines().map(|x| x.chars().collect()).collect();
         let mut queue = VecDeque::new();
         let start = data
@@ -56,7 +56,7 @@ impl Run for Aoc<2022, 12> {
         }
         Ok(ret.into())
     }
-    fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn partb(&self) -> Result<AocResult, AocError> {
         let mut data: Vec<Vec<_>> = self.lines().map(|x| x.chars().collect()).collect();
         let mut queue = VecDeque::new();
         let start = data

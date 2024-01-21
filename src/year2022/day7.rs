@@ -1,5 +1,4 @@
 use super::*;
-use std::error::Error;
 
 #[derive(Default)]
 struct File {
@@ -29,7 +28,7 @@ impl File {
 }
 
 impl Run for Aoc<2022, 7> {
-    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn parta(&self) -> Result<AocResult, AocError> {
         Ok(self
             .lines()
             .skip(1)
@@ -72,7 +71,7 @@ impl Run for Aoc<2022, 7> {
             .sumbelow(100000)
             .into())
     }
-    fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn partb(&self) -> Result<AocResult, AocError> {
         let a = self
             .lines()
             .skip(1)

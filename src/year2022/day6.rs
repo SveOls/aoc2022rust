@@ -1,8 +1,7 @@
 use super::*;
-use std::error::Error;
 
 impl Run for Aoc<2022, 6> {
-    fn parta(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn parta(&self) -> Result<AocResult, AocError> {
         Ok(self
             .as_bytes()
             .array_windows::<4>()
@@ -17,7 +16,7 @@ impl Run for Aoc<2022, 6> {
             .unwrap()
             .into())
     }
-    fn partb(&self) -> Result<AocResult, Box<dyn Error>> {
+    fn partb(&self) -> Result<AocResult, AocError> {
         Ok(self
             .as_bytes()
             .array_windows::<14>()
