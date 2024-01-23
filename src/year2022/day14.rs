@@ -24,7 +24,7 @@ impl FromStr for Wall {
             rocks: s
                 .split(" -> ")
                 .map(|x| {
-                    x.split_once(",")
+                    x.split_once(',')
                         .map(|x| x.0.parse().and_then(|x0| x.1.parse().map(|x1| [x0, x1])))
                         .unwrap()
                 })

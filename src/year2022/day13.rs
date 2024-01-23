@@ -25,10 +25,10 @@ impl std::fmt::Debug for Val {
     }
 }
 
-impl Into<String> for Val {
-    fn into(self) -> String {
+impl From<Val> for String {
+    fn from(val: Val) -> Self {
         let mut ret = String::new();
-        match self {
+        match val {
             Val::Single(a) => ret += a.to_string().as_str(),
             Val::List(b) => {
                 ret += "[";
@@ -68,7 +68,7 @@ impl TryFrom<&str> for Val {
                     ',' if *state == 0 => Some(Some(x.0)),
                     _ => Some(None),
                 })
-                .filter_map(|x| x)
+                .flatten()
                 .chain(core::iter::once(val.len()));
             let mut prev = 0;
             let mut ret = Vec::new();
@@ -96,13 +96,13 @@ impl PartialOrd for Val {
 impl Ord for Val {
     fn cmp(&self, other: &Self) -> core::cmp::Ordering {
         use Val::*;
-        let ret = match (self, other) {
+        
+        match (self, other) {
             (Single(a), Single(b)) => a.cmp(b),
-            (Single(a), List(b)) => vec![Single(*a)].cmp(&b),
+            (Single(a), List(b)) => vec![Single(*a)].cmp(b),
             (List(a), Single(b)) => a.cmp(&vec![Single(*b)]),
             (List(a), List(b)) => a.cmp(b),
-        };
-        ret
+        }
     }
 }
 

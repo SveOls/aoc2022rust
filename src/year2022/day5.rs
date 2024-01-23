@@ -51,11 +51,11 @@ fn folder_b(mut acc: [u8; 66], x: [u8; 4]) -> [u8; 66] {
         .0] = x[0];
     if let Some(a) = acc
         .get_mut(start_ind - x[1] as usize..end_ind)
-        .filter(|a| a.len() > 0)
+        .filter(|a| !a.is_empty())
     {
         a.rotate_left(x[1] as usize);
     }
-    if let Some(a) = acc.get_mut(end_ind..start_ind).filter(|a| a.len() > 0) {
+    if let Some(a) = acc.get_mut(end_ind..start_ind).filter(|a| !a.is_empty()) {
         a.rotate_right(x[1] as usize);
     }
     acc
@@ -86,12 +86,12 @@ fn folder_a(mut acc: [u8; 66], x: [u8; 4]) -> [u8; 66] {
     for i in 0..x[1] as usize {
         if let Some(a) = acc
             .get_mut(start_ind - i - 1..end_ind)
-            .filter(|a| a.len() > 0)
+            .filter(|a| !a.is_empty())
         {
             a.rotate_left(1);
             // break;
         }
-        if let Some(a) = acc.get_mut(end_ind + i..start_ind).filter(|a| a.len() > 0) {
+        if let Some(a) = acc.get_mut(end_ind + i..start_ind).filter(|a| !a.is_empty()) {
             a.rotate_right(1);
         }
     }

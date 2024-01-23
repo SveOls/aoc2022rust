@@ -6,7 +6,7 @@ impl Run for Aoc<2022, 3> {
             .lines()
             .map(|x| x.split_at(x.char_indices().nth(x.chars().count() / 2).unwrap().0))
             .map(|(a, b)| a.chars().find(|&o| b.chars().any(|p| p == o)).unwrap())
-            .map(|c| (c as u8 - c.is_ascii_lowercase().then_some(96).unwrap_or(38)) as i64)
+            .map(|c| (c as u8 - if c.is_ascii_lowercase() { 96 } else { 38 }) as i64)
             .sum::<i64>()
             .into())
     }
@@ -19,7 +19,7 @@ impl Run for Aoc<2022, 3> {
                     .find(|&a| y.chars().any(|b| b == a) && z.chars().any(|c| c == a))
                     .unwrap()
             })
-            .map(|c| (c as u8 - c.is_ascii_lowercase().then_some(96).unwrap_or(38)) as i64)
+            .map(|c| (c as u8 - if c.is_ascii_lowercase() { 96 } else { 38 }) as i64)
             .sum::<i64>()
             .into())
     }

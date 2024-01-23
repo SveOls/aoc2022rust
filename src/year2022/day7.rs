@@ -4,7 +4,7 @@ use super::*;
 struct File {
     name: [u8; 8],
     above: Option<Box<File>>,
-    below: Box<Vec<File>>,
+    below: Vec<File>,
     value: i64,
 }
 
@@ -57,7 +57,7 @@ impl Run for Aoc<2022, 7> {
                         name: std::array::from_fn(|i| *b.get(i).unwrap_or(&0)),
                         ..Default::default()
                     }),
-                    [c @ ..] => {
+                    c => {
                         acc.value += String::from_utf8_lossy(c)
                             .split_once(|c| c == ' ')
                             .unwrap()
@@ -100,7 +100,7 @@ impl Run for Aoc<2022, 7> {
                         name: std::array::from_fn(|i| *b.get(i).unwrap_or(&0)),
                         ..Default::default()
                     }),
-                    [c @ ..] => {
+                    c => {
                         acc.value += String::from_utf8_lossy(c)
                             .split_once(|c| c == ' ')
                             .unwrap()

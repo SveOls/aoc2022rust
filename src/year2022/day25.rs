@@ -9,9 +9,9 @@ impl From<&str> for Snafu {
         for (i, c) in value.chars().rev().enumerate() {
             match c {
                 '=' => ret -= 2 * 5i64.pow(i as u32),
-                '-' => ret -= 1 * 5i64.pow(i as u32),
+                '-' => ret -= 5i64.pow(i as u32),
                 '0' => {},
-                '1' => ret += 1 * 5i64.pow(i as u32),
+                '1' => ret += 5i64.pow(i as u32),
                 '2' => ret += 2 * 5i64.pow(i as u32),
                 _ => panic!()
             }
@@ -20,10 +20,10 @@ impl From<&str> for Snafu {
     }
 }
 
-impl Into<String> for Snafu {
-    fn into(self) -> String {
+impl From<Snafu> for String {
+    fn from(val: Snafu) -> Self {
         let mut ret = String::new();
-        let mut temp = self.0;
+        let mut temp = val.0;
         while temp != 0 {
             let rem = temp % 5;
             let tepest = match rem {

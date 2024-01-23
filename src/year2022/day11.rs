@@ -127,7 +127,7 @@ impl Run for Aoc<2022, 11> {
         let lcm = monkeys
             .iter()
             .map(|x| x.test.0)
-            .reduce(|acc, x| num::integer::lcm(acc, x))
+            .reduce(num::integer::lcm)
             .unwrap();
         let mut ret = vec![0; monkeys.len()];
         for _ in 0..10000 {

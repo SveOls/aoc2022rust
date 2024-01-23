@@ -29,29 +29,17 @@ impl Run for Aoc<2022, 12> {
                 ret = i;
                 break;
             }
-            if pos[0] != 0 {
-                if (data[pos[0] - 1][pos[1]] as u8).saturating_sub(data[pos[0]][pos[1]] as u8) <= 1
-                {
-                    queue.push_back(([pos[0] - 1, pos[1]], i + 1))
-                }
+            if pos[0] != 0 && (data[pos[0] - 1][pos[1]] as u8).saturating_sub(data[pos[0]][pos[1]] as u8) <= 1 {
+                queue.push_back(([pos[0] - 1, pos[1]], i + 1))
             }
-            if pos[1] != 0 {
-                if (data[pos[0]][pos[1] - 1] as u8).saturating_sub(data[pos[0]][pos[1]] as u8) <= 1
-                {
-                    queue.push_back(([pos[0], pos[1] - 1], i + 1))
-                }
+            if pos[1] != 0 && (data[pos[0]][pos[1] - 1] as u8).saturating_sub(data[pos[0]][pos[1]] as u8) <= 1 {
+                queue.push_back(([pos[0], pos[1] - 1], i + 1))
             }
-            if pos[0] < data.len() - 1 {
-                if (data[pos[0] + 1][pos[1]] as u8).saturating_sub(data[pos[0]][pos[1]] as u8) <= 1
-                {
-                    queue.push_back(([pos[0] + 1, pos[1]], i + 1))
-                }
+            if pos[0] < data.len() - 1 && (data[pos[0] + 1][pos[1]] as u8).saturating_sub(data[pos[0]][pos[1]] as u8) <= 1 {
+                queue.push_back(([pos[0] + 1, pos[1]], i + 1))
             }
-            if pos[1] < data[0].len() - 1 {
-                if (data[pos[0]][pos[1] + 1] as u8).saturating_sub(data[pos[0]][pos[1]] as u8) <= 1
-                {
-                    queue.push_back(([pos[0], pos[1] + 1], i + 1))
-                }
+            if pos[1] < data[0].len() - 1 && (data[pos[0]][pos[1] + 1] as u8).saturating_sub(data[pos[0]][pos[1]] as u8) <= 1 {
+                queue.push_back(([pos[0], pos[1] + 1], i + 1))
             }
         }
         Ok(ret.into())
@@ -82,29 +70,17 @@ impl Run for Aoc<2022, 12> {
                 ret = i;
                 break;
             }
-            if pos[0] != 0 {
-                if (data[pos[0]][pos[1]] as u8).saturating_sub(data[pos[0] - 1][pos[1]] as u8) <= 1
-                {
-                    queue.push_back(([pos[0] - 1, pos[1]], i + 1))
-                }
+            if pos[0] != 0 && (data[pos[0]][pos[1]] as u8).saturating_sub(data[pos[0] - 1][pos[1]] as u8) <= 1 {
+                queue.push_back(([pos[0] - 1, pos[1]], i + 1))
             }
-            if pos[1] != 0 {
-                if (data[pos[0]][pos[1]] as u8).saturating_sub(data[pos[0]][pos[1] - 1] as u8) <= 1
-                {
-                    queue.push_back(([pos[0], pos[1] - 1], i + 1))
-                }
+            if pos[1] != 0 && (data[pos[0]][pos[1]] as u8).saturating_sub(data[pos[0]][pos[1] - 1] as u8) <= 1 {
+                queue.push_back(([pos[0], pos[1] - 1], i + 1))
             }
-            if pos[0] < data.len() - 1 {
-                if (data[pos[0]][pos[1]] as u8).saturating_sub(data[pos[0] + 1][pos[1]] as u8) <= 1
-                {
-                    queue.push_back(([pos[0] + 1, pos[1]], i + 1))
-                }
+            if pos[0] < data.len() - 1 && (data[pos[0]][pos[1]] as u8).saturating_sub(data[pos[0] + 1][pos[1]] as u8) <= 1 {
+                queue.push_back(([pos[0] + 1, pos[1]], i + 1))
             }
-            if pos[1] < data[0].len() - 1 {
-                if (data[pos[0]][pos[1]] as u8).saturating_sub(data[pos[0]][pos[1] + 1] as u8) <= 1
-                {
-                    queue.push_back(([pos[0], pos[1] + 1], i + 1))
-                }
+            if pos[1] < data[0].len() - 1 && (data[pos[0]][pos[1]] as u8).saturating_sub(data[pos[0]][pos[1] + 1] as u8) <= 1 {
+                queue.push_back(([pos[0], pos[1] + 1], i + 1))
             }
         }
         Ok(ret.into())

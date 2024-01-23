@@ -8,7 +8,7 @@ enum Block {
     Cross,
     Corner,
     Vertical,
-    Block,
+    Square,
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
@@ -26,7 +26,7 @@ impl Block {
             Block::Cross => vec![[1, 0], [0, 1], [1, 1], [2, 1], [1, 2]],
             Block::Corner => vec![[0, 0], [0, 1], [0, 2], [1, 2], [2, 2]],
             Block::Vertical => vec![[0, 0], [1, 0], [2, 0], [3, 0]],
-            Block::Block => vec![[0, 0], [0, 1], [1, 0], [1, 1]],
+            Block::Square => vec![[0, 0], [0, 1], [1, 0], [1, 1]],
         }
     }
     fn dims(&self) -> [usize; 2] {
@@ -35,7 +35,7 @@ impl Block {
             Block::Cross => [3, 3],
             Block::Corner => [3, 3],
             Block::Vertical => [4, 1],
-            Block::Block => [2, 2],
+            Block::Square => [2, 2],
         }
     }
 }
@@ -114,7 +114,7 @@ fn run<const N: usize>(inp: &Aoc<2022, 17>, goal: usize) -> Result<AocResult, Ao
         Block::Cross,
         Block::Corner,
         Block::Vertical,
-        Block::Block,
+        Block::Square,
     ];
     let mut next_block = {
         let mut i = 0;
