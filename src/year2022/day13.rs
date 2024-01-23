@@ -96,7 +96,7 @@ impl PartialOrd for Val {
 impl Ord for Val {
     fn cmp(&self, other: &Self) -> core::cmp::Ordering {
         use Val::*;
-        
+
         match (self, other) {
             (Single(a), Single(b)) => a.cmp(b),
             (Single(a), List(b)) => vec![Single(*a)].cmp(b),

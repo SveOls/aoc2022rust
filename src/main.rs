@@ -29,7 +29,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 enum AocResult {
     Num(i64),
     Str(String),
-    Wrong(String)
+    Wrong(String),
 }
 
 impl From<i64> for AocResult {
@@ -135,10 +135,7 @@ impl<const Y: u32, const D: u8> Run for Aoc<Y, D> {
         if print {
             println!("{:?}", b_el);
         }
-        Ok(vec![
-            (a_res, a_el),
-            (b_res, b_el)
-        ])
+        Ok(vec![(a_res, a_el), (b_res, b_el)])
     }
     default fn parta(&self) -> Result<AocResult, AocError> {
         Ok(AocResult::Wrong(format!("tried to run {Y}-{D}-a")))
@@ -178,7 +175,13 @@ impl<const Y: u32> Run for Aoc<Y, 0> {
         ret.extend(Aoc::<Y, 25>::run(print)?);
         let sum: f64 = ret.iter().map(|x| x.1).sum::<Duration>().as_nanos() as f64;
         for (d, [i, j]) in ret.array_chunks::<2>().enumerate() {
-            println!("{:>2}: {:>4.1}% ({:.5?}, {:.5?})", d + 1, 100. * ((i.1 + j.1).as_nanos() as f64 / sum), i.1, j.1)
+            println!(
+                "{:>2}: {:>4.1}% ({:.5?}, {:.5?})",
+                d + 1,
+                100. * ((i.1 + j.1).as_nanos() as f64 / sum),
+                i.1,
+                j.1
+            )
         }
         println!("Total: {:?}", ret.iter().map(|x| x.1).sum::<Duration>());
         Ok(ret)

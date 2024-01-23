@@ -2,7 +2,6 @@ use super::*;
 
 struct Snafu(i64);
 
-
 impl From<&str> for Snafu {
     fn from(value: &str) -> Self {
         let mut ret = 0;
@@ -10,10 +9,10 @@ impl From<&str> for Snafu {
             match c {
                 '=' => ret -= 2 * 5i64.pow(i as u32),
                 '-' => ret -= 5i64.pow(i as u32),
-                '0' => {},
+                '0' => {}
                 '1' => ret += 5i64.pow(i as u32),
                 '2' => ret += 2 * 5i64.pow(i as u32),
-                _ => panic!()
+                _ => panic!(),
             }
         }
         Self(ret)
@@ -38,7 +37,7 @@ impl From<Snafu> for String {
                     temp += 5;
                     "-"
                 }
-                _ => unreachable!()
+                _ => unreachable!(),
             };
             ret = tepest.to_string() + ret.clone().as_str();
             temp -= rem;
@@ -50,7 +49,10 @@ impl From<Snafu> for String {
 
 impl Run for Aoc<2022, 25> {
     fn parta(&self) -> Result<AocResult, AocError> {
-        Ok(<Snafu as Into<String>>::into(Snafu(self.lines().map(Snafu::from).map(|x| x.0).sum())).into())
+        Ok(
+            <Snafu as Into<String>>::into(Snafu(self.lines().map(Snafu::from).map(|x| x.0).sum()))
+                .into(),
+        )
     }
     fn partb(&self) -> Result<AocResult, AocError> {
         Ok("Finished!!".to_owned().into())

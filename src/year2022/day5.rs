@@ -91,7 +91,10 @@ fn folder_a(mut acc: [u8; 66], x: [u8; 4]) -> [u8; 66] {
             a.rotate_left(1);
             // break;
         }
-        if let Some(a) = acc.get_mut(end_ind + i..start_ind).filter(|a| !a.is_empty()) {
+        if let Some(a) = acc
+            .get_mut(end_ind + i..start_ind)
+            .filter(|a| !a.is_empty())
+        {
             a.rotate_right(1);
         }
     }
