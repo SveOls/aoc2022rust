@@ -1,4 +1,4 @@
-use std::{collections::HashMap, rc::Rc, cell::RefCell};
+use std::{cell::RefCell, collections::HashMap, rc::Rc};
 
 use super::*;
 
@@ -70,14 +70,16 @@ impl Run for Aoc<2022, 21> {
             })
             .collect();
         for (k, v) in &a.clone() {
-            let Monkey::Null(l, r, o) = v.borrow().clone() else { 
+            let Monkey::Null(l, r, o) = v.borrow().clone() else {
                 continue;
             };
             let l = Rc::clone(a.get(&l).unwrap());
             let r = Rc::clone(a.get(&r).unwrap());
             // dbg!(&l);
             // dbg!(&r);
-            a.entry(*k).and_modify(|x| {x.replace(Monkey::Operation(l, r, o));});
+            a.entry(*k).and_modify(|x| {
+                x.replace(Monkey::Operation(l, r, o));
+            });
         }
         // for i in &a {
         //     for j in i.0 {
@@ -86,7 +88,10 @@ impl Run for Aoc<2022, 21> {
         //     println!();
         //     dbg!(i.1);
         // }
-        Ok(a.get(&[b'r', b'o', b'o', b't']).map(|x| x.borrow().val()).unwrap().into())
+        Ok(a.get(&[b'r', b'o', b'o', b't'])
+            .map(|x| x.borrow().val())
+            .unwrap()
+            .into())
     }
     fn partb(&self) -> Result<AocResult, AocError> {
         let mut a: HashMap<[u8; 4], Rc<RefCell<Monkey>>> = self
@@ -104,14 +109,16 @@ impl Run for Aoc<2022, 21> {
             })
             .collect();
         for (k, v) in &a.clone() {
-            let Monkey::Null(l, r, o) = v.borrow().clone() else { 
+            let Monkey::Null(l, r, o) = v.borrow().clone() else {
                 continue;
             };
             let l = Rc::clone(a.get(&l).unwrap());
             let r = Rc::clone(a.get(&r).unwrap());
             // dbg!(&l);
             // dbg!(&r);
-            a.entry(*k).and_modify(|x| {x.replace(Monkey::Operation(l, r, o));});
+            a.entry(*k).and_modify(|x| {
+                x.replace(Monkey::Operation(l, r, o));
+            });
         }
         let humn = a.get(&[b'h', b'u', b'm', b'n']).unwrap().clone();
         let root = a.get(&[b'r', b'o', b'o', b't']).unwrap().clone();
@@ -122,7 +129,7 @@ impl Run for Aoc<2022, 21> {
             humn.replace(Monkey::Val(i));
             let new_val = root.borrow().eq();
             if new_val == 0 {
-                break i
+                break i;
             }
             if let Some(a) = old_val.replace(new_val) {
                 if a.signum() != new_val.signum() {
