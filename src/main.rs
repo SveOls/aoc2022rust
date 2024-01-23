@@ -10,7 +10,6 @@
 #![feature(iter_intersperse)]
 #![feature(option_take_if)]
 #![feature(iter_map_windows)]
-#![feature(slice_first_last_chunk)]
 #![feature(array_windows)]
 use core::{
     error::Error,
